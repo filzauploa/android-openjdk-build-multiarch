@@ -55,9 +55,6 @@ jobs:
     name: "Build for iOS aarch64"
     runs-on: macos-latest
     continue-on-error: true
-    env:
-      LC_ALL: en_US.UTF-8
-      LANG: en_US.UTF-8
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -71,11 +68,10 @@ jobs:
     - name: Build with CI build script
       run: |
         export BUILD_IOS=1
-        brew install awk
+        #brew install awk
         #echo "/opt/procursus/bin:/opt/procursus/local/bin:/Users/eilionoir/.local/bin:/opt/homebrew/bin:/Users/eilionoir/Library/Python/3.9/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Apple/usr/bin:/opt/procursus/games" > $GITHUB_PATH
         export PATH=/opt/procursus/bin:/opt/homebrew/bin:$PATH
         bash "ci_build_arch_aarch64.sh"
-
     - name: Upload JDK build output
       uses: actions/upload-artifact@v4
       with:
